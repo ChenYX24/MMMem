@@ -1,0 +1,9 @@
+-r requirements.txt
+torch==2.5.1
+torchvision==0.20.1
+transformers @ git+https://github.com/huggingface/transformers.git@87d34bfa80aa884bca90c4da79cca18feed90ff6
+accelerate==1.10.1
+peft==0.21.0
+sentence-transformers==6.1.0
+diffusers==0.40.0
+qwen-vl-utils==0.0.14
