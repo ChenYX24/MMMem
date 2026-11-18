@@ -4,10 +4,17 @@
 
 ### Self-Improving Agents with Task-Aware<br>Multimodal Experience Consolidation
 
-**Anonymous Authors**
+<p>
+Yuxuan Chen<sup>1,*</sup> &nbsp; Changwei Lv<sup>2,*</sup> &nbsp; Yunfei Li<sup>3</sup> &nbsp; Zhongjing Du<sup>1</sup> &nbsp; Kehui Tan<sup>1</sup> &nbsp; Zijun Liao<sup>1</sup><br>
+Ruochong Zheng<sup>1</sup> &nbsp; Hao Chen<sup>1</sup> &nbsp; Can Deng<sup>4</sup> &nbsp; Zheni Zeng<sup>3</sup> &nbsp; Chang Liu<sup>4</sup> &nbsp; Jie Chen<sup>1,§</sup>
+</p>
 
-<!-- The current manuscript lists Anonymous Authors. Replace this line with the
-     author-approved names, affiliations, and contribution markers. -->
+<p>
+<sup>1</sup> Peking University &nbsp; <sup>2</sup> South China University of Technology<br>
+<sup>3</sup> Nanjing University &nbsp; <sup>4</sup> Tsinghua University
+</p>
+
+<p><sup>*</sup> Equal contribution &nbsp; <sup>§</sup> Corresponding author</p>
 
 [Overview](#overview) · [Framework](#framework) · [Case studies](#case-studies) · [Quick start](#quick-start) · [Usage](USAGE.md)
 
