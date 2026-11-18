@@ -1,34 +1,43 @@
+<div align="center">
+
 # MMMem
 
-**Self-Improving Agents with Task-Aware Multimodal Experience Consolidation**
+### Self-Improving Agents with Task-Aware<br>Multimodal Experience Consolidation
 
-MMMem links scattered text and image evidence, trains an agent on self-generated tasks, and consolidates task experience for later retrieval and reuse.
+**Anonymous Authors**
 
-```mermaid
-flowchart LR
-    A["Interaction history"] --> B["Multimodal Memory"]
-    B --> C["Self-Improving Training"]
-    B --> D["Task-Aware Online Editing"]
-    C -->|LoRA reader| D
-    C -->|Warm-up| E["Experience Memory"]
-    E -->|Recall| D
-    D -->|Consolidate| E
-    D --> F["Answer with source evidence"]
-```
+<!-- The current manuscript lists Anonymous Authors. Replace this line with the
+     author-approved names, affiliations, and contribution markers. -->
 
-[Usage](USAGE.md) · [Data and models](USAGE.md#data-and-models) · [GPU quick start](#gpu-quick-start)
+[Overview](#overview) · [Framework](#framework) · [Case studies](#case-studies) · [Quick start](#quick-start) · [Usage](USAGE.md)
 
-## Multimodal Memory
+</div>
 
-Organize source records into linked nodes. A node can carry text, original images, rendered pages, and generated scene views, with references back to the original evidence.
+## Overview
 
-## Self-Improving Training
+**MMMem connects scattered multimodal evidence and reuses experience across tasks.** It organizes text, images, pages, and generated views into source-linked memory, learns from self-generated tasks, and consolidates task experience for later retrieval and editing.
 
-Generate tasks from source memory. Use training-unit tasks for offline LoRA and source-generated warm-up tasks to initialize the experience memory of an evaluation unit. Reader weights stay fixed during downstream tasks.
+![MMMem motivation and overview: scattered evidence and repeated mistakes, followed by multimodal memory, self-improvement, experience consolidation, and task-aware reuse.](docs/assets/mmmem-overview.png)
 
-## Task-Aware Online Editing
+*Figure 1. Multimodal memory brings evidence together; self-improvement and experience consolidation help the agent reuse what it learns in later tasks.*
 
-Retrieve source evidence and relevant experience, answer with source references, and write a task summary. Staged experiences can be consolidated into long-term memory through supported reuse.
+## Framework
+
+![MMMem framework: multi-view source memory, self-improving training and warm-up, and task-aware online editing with staged and retained experience.](docs/assets/mmmem-framework.png)
+
+*Figure 2. Source memory feeds self-generated tasks and downstream retrieval. Training updates the reader; warm-up and online editing build experience memory.*
+
+- **Multimodal Memory.** Organize source records into linked nodes with text, original images, rendered pages, and generated scene views. Each view links back to its source evidence.
+- **Self-Improving Training.** Generate tasks from source memory. Tasks from separate training sources fine-tune the reader with LoRA; source-generated warm-up tasks initialize experience memory with reader weights fixed.
+- **Task-Aware Online Editing.** Retrieve source evidence and relevant experience, answer with source references, and write a new experience. Staged experiences advance to long-term retention through supported reuse.
+
+The implementation supports **Qwen3.5-9B** and **MiniCPM-V 4.5** readers. See the [experiment guide](USAGE.md) for data preparation, task generation, LoRA training, warm-up, evaluation, and component controls.
+
+## Case studies
+
+![MMMem case studies: a generated view changes visual retrieval, recalled experience connects a bird's common and scientific names for photo counting, and task warm-up changes the recalled cue from a pet name to a dog breed.](docs/assets/mmmem-case-studies.png)
+
+*Figure 3. Examples from the paper trace generated views, recalled experience, and task warm-up through the evidence and answers.*
 
 ## Quick start
 
@@ -51,6 +60,9 @@ python scripts/run_memorium_u05_cell.py \
 The CPU example uses a hash encoder and an echo reader to show the input and output formats. Each run takes a fresh output directory.
 
 ## GPU quick start
+
+<details>
+<summary>Run the example with a LoRA reader, image generation, retrieval, and warm-up</summary>
 
 Use a CUDA GPU with 80 GB of memory for this example. Install the model dependencies and place these downloaded model snapshots under `$MMMEM_WORKSPACE/models/`.
 
@@ -83,6 +95,8 @@ python scripts/run_memorium_u05_cell.py \
 ```
 
 This runs one warm-up task and two downstream tasks with real encoders, image generation, reranking, and a LoRA reader. Results include `rows.jsonl`, `warmup_rows.jsonl`, and `run_manifest.json`. For the base reader, use `F_v2_zero` and omit `--reader-adapter`.
+
+</details>
 
 ## Benchmarks
 
